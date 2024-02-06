@@ -1,0 +1,15 @@
+{
+  "name": "asap-project",
+  "version": "1.0.0",
+  "description": "\"# S_50_Worst_Places_To_Visit_During_Winter_\"",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Adithyan",
+  "license": "ISC",
+  "dependencies": {
+    
+   
+  }
+}
