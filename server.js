@@ -1,13 +1,13 @@
 const express = require('express');
 const app = express();
-const port = 3000;
+const port = 3002;
 
 app.get('/ping',(req,res)=>{
   res.send('pong')
-})
+});
 
-  app.listen(port, () => {
+app.listen(port, () => {
     console.log(`🚀 server running on PORT: ${port}`);
-  });
+});
 
-module.exports = app;
+// module.exports = app;
