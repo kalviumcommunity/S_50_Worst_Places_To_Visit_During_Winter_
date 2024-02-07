@@ -4,12 +4,12 @@
   "description": "\"# S_50_Worst_Places_To_Visit_During_Winter_\"",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev":"nodemon server.js"
   },
   "author": "Adithyan",
   "license": "ISC",
   "dependencies": {
-    
-   
+    "express": "^4.18.2"
   }
 }
