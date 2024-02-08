@@ -7,3 +7,5 @@ Brace yourself as we explore the frosty realms that defy the faint-hearted. From
 1.user can enter their place of choice that meets the criteria of worst place to visit during winter
 2.they can add the extreme activites that people can do there.
 3.make and view other people's lists.
+
+Deployed link:https://worstwinter.onrender.com/ping
