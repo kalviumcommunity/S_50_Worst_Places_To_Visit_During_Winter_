@@ -1,28 +1,14 @@
-{
-  
+
+  "name": "asap-project",
+  "version": "1.0.0",
+  "description": "\"# S_50_Worst_Places_To_Visit_During_Winter_\"",
+  "main": "index.js",
   "scripts": {
-  
-    
-  "dev": "nodemon server.js"
-  
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev":"nodemon server.js"
   },
-  
+  "author": "Adithyan",
+  "license": "ISC",
   "dependencies": {
-  
-    
-  "dotenv": "^16.4.4",
-  
-    
-  "express": "^4.18.2",
-  
-    
-  "mongo": "^0.1.0",
-  
-    
-  "mongoose": "^8.1.2",
-  
-    
-  "nodemon": "^3.0.3"
-  
+    "express": "^4.18.2"
   }
-}
