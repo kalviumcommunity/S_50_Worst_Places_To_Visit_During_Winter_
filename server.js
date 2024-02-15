@@ -3,7 +3,8 @@ require('dotenv').config();
 const port = 3000;
 const connectDb = require("./config/database"); 
 const app = express();
-const router = require("./routes/userRoute");
+const userrouter = require("./routes/userRoute");
+const postrouter = require("./routes/postRoute");
 
 const MONGO = process.env.MONGO_URI;
 console.log(MONGO);
@@ -16,7 +17,8 @@ app.get('/ping', (req,res)=>{
 
 app.use(express.json())
 
-app.use("/users",router)
+app.use("/",userrouter)
+app.use("/",postrouter)
 
 app.listen(port, () => {
   console.log(`🚀 Server running on PORT: ${port}`);  
