@@ -1,4 +1,30 @@
 {
+  
+  "scripts": {
+  
+    
+  "dev": "nodemon server.js"
+  
+  },
+  
+  "dependencies": {
+  
+    
+  "dotenv": "^16.4.4",
+  
+    
+  "express": "^4.18.2",
+  
+    
+  "mongo": "^0.1.0",
+  
+    
+  "mongoose": "^8.1.2",
+  
+    
+  "nodemon": "^3.0.3"
+  
+=======
   "name": "asap-project",
   "version": "1.0.0",
   "description": "\"# S_50_Worst_Places_To_Visit_During_Winter_\"",
