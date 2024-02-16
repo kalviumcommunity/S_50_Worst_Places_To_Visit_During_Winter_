@@ -8,7 +8,7 @@ router.get("/posts", async (req, res) => {
         res.json(data);
     } catch (error) {
         console.error(error);
-        res.status(500).json({ error: "Internal Server Error" });
+        res.status(500).json({ error: "Internal Server Error with the getting process of the posts details" });
     }
 });
 
