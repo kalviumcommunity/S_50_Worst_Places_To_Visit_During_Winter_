@@ -5,6 +5,10 @@ const connectDb = require("./config/database");
 const app = express();
 const userrouter = require("./routes/userRoute");
 const postrouter = require("./routes/postRoute");
+const cors = require('cors');
+
+// Use CORS middleware
+app.use(cors());
 
 const MONGO = process.env.MONGO_URI;
 console.log(MONGO);
