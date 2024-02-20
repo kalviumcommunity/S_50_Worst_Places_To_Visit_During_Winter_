@@ -1,0 +1,82 @@
+[
+    {
+        "ID": "1",
+        "Places": "Barrow, Alaska",
+        "AvgWinterTemp": "-14°C (7°F)",
+        "Snowfall": "High",
+        "WinterHazard": "Extreme Cold, Limited Daylight",
+        "TravelAdvisories": "Winter Storm, Road Closure"
+    },
+    {
+        "ID": "2",
+        "Places": "Reykjavik, Iceland",
+        "AvgWinterTemp": "-1°C (30°F)",
+        "Snowfall": "Moderate",
+        "WinterHazard": "Cold, Windy",
+        "TravelAdvisories": "Possible Snowfall"
+    },
+    {
+        "ID": "3",
+        "Places": "Murmansk, Russia",
+        "AvgWinterTemp": "-10°C (14°F)",
+        "Snowfall": "High",
+        "WinterHazard": "Cold, Limited Daylight",
+        "TravelAdvisories": "Winter Storm"
+    },
+    {
+        "ID": "4",
+        "Places": "Yellowknife, Canada",
+        "AvgWinterTemp": "-20°C (-4°F)",
+        "Snowfall": "High",
+        "WinterHazard": "Extreme Cold, Limited Daylight",
+        "TravelAdvisories": "Blizzard Warning"
+    },
+    {
+        "ID": "5",
+        "Places": "Ushuaia, Argentina",
+        "AvgWinterTemp": "0°C (32°F)",
+        "Snowfall": "Low",
+        "WinterHazard": "Cold, Short Daylight Hours",
+        "TravelAdvisories": "No Significant Advisories"
+    },
+    {
+        "ID": "6",
+        "Places": "Tromsø, Norway",
+        "AvgWinterTemp": "-4°C (25°F)",
+        "Snowfall": "Moderate",
+        "WinterHazard": "Cold, Limited Daylight",
+        "TravelAdvisories": "Possible Snowfall"
+    },
+    {
+        "ID": "7",
+        "Places": "Sapporo, Japan",
+        "AvgWinterTemp": "-6°C (21°F)",
+        "Snowfall": "High",
+        "WinterHazard": "Cold, Snowstorms",
+        "TravelAdvisories": "Winter Storm Warning"
+    },
+    {
+        "ID": "8",
+        "Places": "Sioux Lookout, Canada",
+        "AvgWinterTemp": "-15°C (5°F)",
+        "Snowfall": "High",
+        "WinterHazard": "Extreme Cold, Limited Daylight",
+        "TravelAdvisories": "Road Closure Due to Snow Accumulation"
+    },
+    {
+        "ID": "9",
+        "Places": "Nuuk, Greenland",
+        "AvgWinterTemp": "-8°C (18°F)",
+        "Snowfall": "Moderate",
+        "WinterHazard": "Cold, Limited Daylight",
+        "TravelAdvisories": "Possible Snowfall"
+    },
+    {
+        "ID": "10",
+        "Places": "Vostok Station, Antarctica",
+        "AvgWinterTemp": "-60°C (-76°F)",
+        "Snowfall": "High",
+        "WinterHazard": "Extreme Cold, No Daylight",
+        "TravelAdvisories": "Severe Winter Conditions"
+    }
+]

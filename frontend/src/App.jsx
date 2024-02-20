@@ -1,6 +1,7 @@
 import { Route, Routes, Link } from 'react-router-dom'
-import Home from './Components/Home'
+import Home from "./Components/Landingpg"
 import './App.css'
+import Homepg from './Components/Homepg'
 
 function App() {
 
@@ -8,7 +9,7 @@ function App() {
     <>
 
 <Routes>
-  <Route path='/' element={<Home/>}/>
+  <Route path='/' element={<Homepg/>}/>
 </Routes>
 
     </>

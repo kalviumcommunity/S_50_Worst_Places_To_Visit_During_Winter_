@@ -3,8 +3,7 @@ import React from 'react';
 import {
   APP_NAME,
   SITE_DESCRIPTION,
-  SIGN_UP_TEXT,
-  SIGN_IN_TEXT,
+  GetStarted,
 } from "./constants";
 
 function Home() {
@@ -13,8 +12,7 @@ function Home() {
       <h1 className="mt-10 font-bold text-4xl mb-2 text-gray-800">{APP_NAME}</h1>
       <p className="text-lg mb-6 text-gray-700 max-w-md text-center">{SITE_DESCRIPTION}</p>
       <div className="form-container flex items-center">
-        <Link to="/signup" className="but1 btn-signup bg-teal-400 hover:bg-teal-600 px-6 py-3 mr-4 rounded-full">{SIGN_UP_TEXT}</Link>
-        <Link to="/signin" className="but2 btn-signin bg-indigo-400 hover:bg-indigo-600 px-6 py-3 rounded-full">{SIGN_IN_TEXT}</Link>
+        <Link to="/Homepg" className="but1 btn-signup bg-teal-400 hover:bg-teal-600 px-6 py-3 mr-4 rounded-full">{GetStarted}</Link>
       </div>
     </div>
   );

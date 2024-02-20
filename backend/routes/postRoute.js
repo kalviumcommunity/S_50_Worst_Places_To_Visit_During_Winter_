@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const postModel = require("../models/Postmodel");
+const postModel = require("../config/models/Postmodel");
 
 router.get("/posts", async (req, res) => {
     try {
