@@ -1,17 +1,39 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useParams, useNavigate, Link } from 'react-router-dom';
+import Cookies from 'js-cookie';
 
-const Makelist = () => {
+const Update = () => {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
-    Places: '',
-    AvgWinterTemp: '',
-    Snowfall: '',
-    WinterHazard: '',
-    TravelAdvisories: ''
+    places: '',  
+    avgWinterTemp: '',  
+    snowfall: '', 
+    winterHazard: '',
+    travelAdvisories: ''  
   });
+
+  const cookieData = {
+    email: Cookies.get('email'),
+    username: Cookies.get('username'),
+    password: Cookies.get('password'),
+    id: Cookies.get('id'),
+  };
+
+  // console.log('cookieData:', cookieData);
+
+  useEffect(() => {
+    
+  
+    setFormData({
+      ...formData,
+      email: cookieData.email || '',
+      username: cookieData.username || '',
+      password: cookieData.password || '',
+    });
+  }, []);
+  
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -23,16 +45,18 @@ const Makelist = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    
 
     const winterData = {
-      Places: formData.Places,
-      AvgWinterTemp: formData.AvgWinterTemp,
-      Snowfall: formData.Snowfall,
-      WinterHazard: formData.WinterHazard,
-      TravelAdvisories: formData.TravelAdvisories
+      Places: formData.places,
+      AvgWinterTemp: formData.avgWinterTemp,
+      Snowfall: formData.snowfall,
+      WinterHazard: formData.winterHazard,
+      TravelAdvisories: formData.travelAdvisories
     };
+    
 
-    axios.post('http://localhost:3000/posts', winterData)
+    axios.put(`http://localhost:3000/posts/${cookieData.id}`, winterData)
       .then(response => {
         console.log(response.data);
         navigate('/');
@@ -41,18 +65,18 @@ const Makelist = () => {
         console.error('Error:', error);
       });
   };
-
+  
   return (
     <div className="list border border-black max-w-md mx-auto mt-10 p-6  rounded-md shadow-md">
-      <h2 className="text-2xl font-semibold mb-4">Winter Information Form</h2>
+      <h2 className="text-2xl font-semibold mb-4">Update Form</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label htmlFor="places" className="block mb-1">Places:</label>
           <input
             type="text"
             id="places"
-            name="Places"
-            value={formData.Places}
+            name="places"
+            value={formData.places}
             onChange={handleChange}
             className="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500"
           />
@@ -64,8 +88,8 @@ const Makelist = () => {
               type="text"
               placeholder='°C'
               id="avgWinterTemp"
-              name="AvgWinterTemp"
-              value={formData.AvgWinterTemp}
+              name="avgWinterTemp"
+              value={formData.avgWinterTemp}
               onChange={handleChange}
               className="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500"
             />
@@ -76,8 +100,8 @@ const Makelist = () => {
           <input
             type="text"
             id="snowfall"
-            name="Snowfall"
-            value={formData.Snowfall}
+            name="snowfall"
+            value={formData.snowfall}
             onChange={handleChange}
             className="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500"
           />
@@ -87,8 +111,8 @@ const Makelist = () => {
           <input
             type="text"
             id="winterHazard"
-            name="WinterHazard"
-            value={formData.WinterHazard}
+            name="winterHazard"
+            value={formData.winterHazard}
             onChange={handleChange}
             className="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500"
           />
@@ -98,16 +122,18 @@ const Makelist = () => {
           <input
             type="text"
             id="travelAdvisories"
-            name="TravelAdvisories"
-            value={formData.TravelAdvisories}
+            name="travelAdvisories"
+            value={formData.travelAdvisories}
             onChange={handleChange}
             className="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500"
           />
         </div>
+
         <button type="submit" className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition duration-300">Submit</button>
+
       </form>
     </div>
   );
 };
 
-export default Makelist;
+export default Update;
