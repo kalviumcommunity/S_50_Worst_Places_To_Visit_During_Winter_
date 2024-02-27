@@ -21,7 +21,7 @@ const Update = () => {
     id: Cookies.get('id'),
   };
 
-  console.log('cookieData:', cookieData);
+  // console.log('cookieData:', cookieData);
 
   useEffect(() => {
     
