@@ -1,31 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useParams, useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 
 const Update = () => {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
-    places: '',  
-    avgWinterTemp: '',  
-    snowfall: '', 
+    places: '',
+    avgWinterTemp: '',
+    snowfall: '',
     winterHazard: '',
-    travelAdvisories: ''  
+    travelAdvisories: '',
   });
 
+  const [errorMessage, setErrorMessage] = useState('');
+
   const cookieData = {
-    email: Cookies.get('email'),
-    username: Cookies.get('username'),
-    password: Cookies.get('password'),
-    id: Cookies.get('id'),
+    id: Cookies.get('id')
   };
 
-  // console.log('cookieData:', cookieData);
-
   useEffect(() => {
-    
-  
     setFormData({
       ...formData,
       email: cookieData.email || '',
@@ -34,44 +29,51 @@ const Update = () => {
     });
   }, []);
   
+  
+
+  const winterData = {
+    Places: formData.places,
+    AvgWinterTemp: formData.avgWinterTemp,
+    Snowfall: formData.snowfall,
+    WinterHazard: formData.winterHazard,
+    TravelAdvisories: formData.travelAdvisories,
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
-      [name]: value
+      [name]: value,
     });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
 
-    const winterData = {
-      Places: formData.places,
-      AvgWinterTemp: formData.avgWinterTemp,
-      Snowfall: formData.snowfall,
-      WinterHazard: formData.winterHazard,
-      TravelAdvisories: formData.travelAdvisories
-    };
-    
-
+ 
+    console.log(winterData)
     axios.put(`http://localhost:3000/posts/${cookieData.id}`, winterData)
-      .then(response => {
+      .then((response) => {
         console.log(response.data);
         navigate('/');
       })
-      .catch(error => {
+      .catch((error) => {
         console.error('Error:', error);
+        setErrorMessage('Internal Server Error');
       });
   };
-  
+
   return (
-    <div className="list border border-black max-w-md mx-auto mt-10 p-6  rounded-md shadow-md">
+    <div className="list border border-black max-w-md mx-auto mt-10 p-6 rounded-md shadow-md">
       <h2 className="text-2xl font-semibold mb-4">Update Form</h2>
+
+      {errorMessage && <p className="text-red-500 mb-4">{errorMessage}</p>}
+
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label htmlFor="places" className="block mb-1">Places:</label>
+          <label htmlFor="places" className="block mb-1">
+            Places:
+          </label>
           <input
             type="text"
             id="places"
@@ -82,11 +84,13 @@ const Update = () => {
           />
         </div>
         <div>
-          <label htmlFor="avgWinterTemp" className="block mb-1">Average Winter Temperature (°C):</label>
+          <label htmlFor="avgWinterTemp" className="block mb-1">
+            Average Winter Temperature (°C):
+          </label>
           <div className="relative">
             <input
               type="text"
-              placeholder='°C'
+              placeholder="°C"
               id="avgWinterTemp"
               name="avgWinterTemp"
               value={formData.avgWinterTemp}
@@ -96,7 +100,9 @@ const Update = () => {
           </div>
         </div>
         <div>
-          <label htmlFor="snowfall" className="block mb-1">Snowfall:</label>
+          <label htmlFor="snowfall" className="block mb-1">
+            Snowfall:
+          </label>
           <input
             type="text"
             id="snowfall"
@@ -107,7 +113,9 @@ const Update = () => {
           />
         </div>
         <div>
-          <label htmlFor="winterHazard" className="block mb-1">Winter Hazard:</label>
+          <label htmlFor="winterHazard" className="block mb-1">
+            Winter Hazard:
+          </label>
           <input
             type="text"
             id="winterHazard"
@@ -118,7 +126,9 @@ const Update = () => {
           />
         </div>
         <div>
-          <label htmlFor="travelAdvisories" className="block mb-1">Travel Advisories:</label>
+          <label htmlFor="travelAdvisories" className="block mb-1">
+            Travel Advisories:
+          </label>
           <input
             type="text"
             id="travelAdvisories"
@@ -129,8 +139,12 @@ const Update = () => {
           />
         </div>
 
-        <button type="submit" className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition duration-300">Submit</button>
-
+        <button
+          type="submit"
+          className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition duration-300"
+        >
+          Submit
+        </button>
       </form>
     </div>
   );

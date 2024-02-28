@@ -40,7 +40,7 @@ function Homepg() {
   };
 
   return (
-    <div className="container mx-auto">
+    <div className="container  mx-auto">
       <nav className="h-20 border border-black flex items-center sticky top-0 bg-white">
         <div className='logo w-56 h-14 mt-5 ml-5'><img src={img} alt="Logo" /></div>
         <input type="text" placeholder="Find the list of.." className="rounded h-8 border border-slate-600 mx-auto pl-2" />

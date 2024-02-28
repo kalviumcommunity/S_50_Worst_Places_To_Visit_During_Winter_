@@ -5,7 +5,7 @@ import Homepg from './Components/Homepg'
 import Makelist from './Components/Makelist'
 import Updatee from "./Components/Updatee"
 import Signup from './Components/Signup'
-import Home from "./Components/Landingpg"
+// import Home from "./Components/Landingpg"
 
 function App() {
 
