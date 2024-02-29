@@ -20,12 +20,7 @@ const Signup = () => {
     });
   };
 
-  const setCookies = (email, username, password, id) => {
-    Cookies.setItem('email', email);
-    Cookies.setItem('username', username);
-    Cookies.setItem('password', password);
-    Cookies.setItem('id', id);
-  };
+ 
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -40,7 +35,7 @@ const Signup = () => {
       .post('http://localhost:3000/users', userData)
       .then((response) => {
         console.log("Dtaa",response.data);
-        setCookies(response.data.Email, response.data.Username, response.data.Password);
+        
         navigate('/');
       })
       .catch((error) => {
@@ -91,7 +86,7 @@ const Signup = () => {
             className="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500"
           />
         </div>
-\        <button
+      <button
           type="submit"
           className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition duration-300">
           Submit

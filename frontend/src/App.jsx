@@ -5,7 +5,8 @@ import Homepg from './Components/Homepg'
 import Makelist from './Components/Makelist'
 import Updatee from "./Components/Updatee"
 import Signup from './Components/Signup'
-// import Home from "./Components/Landingpg"
+import Landingpg from './Components/Landingpg'
+import Login from './Components/Login'
 
 function App() {
 
@@ -13,10 +14,15 @@ function App() {
 
 
     <Routes>
+
       <Route path='/' element={<Homepg />} />
       <Route path='/makelist' element={<Makelist />} />
       <Route path='/update' element={<Updatee />} />
       <Route path='/signup' element={<Signup />} />
+      <Route path='/Landingpg' element={<Landingpg />} />
+      <Route path='/Login' element={<Login/>} />
+
+
 
 
     </Routes>
