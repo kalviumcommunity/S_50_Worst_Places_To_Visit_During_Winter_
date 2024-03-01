@@ -15,11 +15,12 @@ function App() {
 
     <Routes>
 
-      <Route path='/' element={<Homepg />} />
+
+      <Route path='/' element={<Landingpg />} />
+      <Route path='/Homepg' element={<Homepg />} />
       <Route path='/makelist' element={<Makelist />} />
       <Route path='/update' element={<Updatee />} />
       <Route path='/signup' element={<Signup />} />
-      <Route path='/Landingpg' element={<Landingpg />} />
       <Route path='/Login' element={<Login/>} />
 
 

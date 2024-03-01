@@ -12,6 +12,8 @@ const Signup = () => {
     Password: '',
   });
 
+  const [sub, setSub] = useState(false);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -20,27 +22,32 @@ const Signup = () => {
     });
   };
 
- 
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const userData = {
-      Username: formData.Username,
-      Email: formData.Email,
-      Password: formData.Password,
-    };
+    setSub(true);
 
-    axios
-      .post('http://localhost:3000/users', userData)
-      .then((response) => {
-        console.log("Dtaa",response.data);
-        
-        navigate('/');
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-      });
+    try {
+      const userData = {
+        Username: formData.Username,
+        Email: formData.Email,
+        Password: formData.Password,
+      };
+
+      const response = await axios.post('http://localhost:3000/users', userData);
+
+      const { user, token } = response.data;
+      console.log('Token: ', token);
+
+      Cookies.set('userData', JSON.stringify(user));
+      Cookies.set('Token', token);
+
+      navigate('/Homepg');
+    } catch (error) {
+      console.error('Error during POST request:', error);
+    } finally {
+      setSub(false);
+    }
   };
 
   return (
@@ -86,10 +93,12 @@ const Signup = () => {
             className="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500"
           />
         </div>
-      <button
+        <button
           type="submit"
-          className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition duration-300">
-          Submit
+          className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition duration-300"
+          disabled={sub}
+        >
+          {sub ? 'Submitting...' : 'Submit'}
         </button>
       </form>
     </div>
