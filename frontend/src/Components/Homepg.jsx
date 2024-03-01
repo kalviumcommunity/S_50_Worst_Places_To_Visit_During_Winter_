@@ -4,13 +4,16 @@ import img from '../assets/logo.png';
 import { Link } from 'react-router-dom';
 import Cookies from 'js-cookie';
 
+const api = axios.create({
+  baseURL: 'http://localhost:3000',
+});
+
 function Homepg() {
   const [data, setData] = useState([]);
   const [user, setUser] = useState();
   const [error, setError] = useState(null);
 
   const setCookie = (id) => {
-    console.log(id);
     Cookies.set('id', id);
   };
 
@@ -19,19 +22,24 @@ function Homepg() {
     setUser(null);
   };
 
-  useEffect(() => {
-    const UserData = Cookies.get('userData');
-    console.log(UserData);
-    if (UserData) {
-      const parsedUserData = JSON.parse(UserData);
-      setUser(parsedUserData);
-    }
-  }, []);
+  // useEffect(() => {
+  //   const UserData = Cookies.get('userData');
+  
+  //   try {
+  //     if (UserData) {
+  //       const parsedUserData = JSON.parse(UserData);
+  //       setUser(parsedUserData);
+  //     }
+  //   } catch (error) {
+  //     console.error('Error parsing user data from cookies:', error);
+  //   }
+  // }, []);
+  
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/posts');
+        const response = await api.get('/posts');
         setData(response.data);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -44,7 +52,7 @@ function Homepg() {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:3000/posts/${id}`);
+      await api.delete(`/posts/${id}`);
       setData((prevData) => prevData.filter((entry) => entry._id !== id));
     } catch (error) {
       console.error('Error deleting data:', error);
@@ -55,7 +63,7 @@ function Homepg() {
   return (
     <div className="container mx-auto flex flex-col min-h-screen">
       <nav className="h-20 border border-black flex items-center sticky top-0 bg-white">
-        <Link to="/Landingpg">
+        <Link to="/Homepg">
           <div className="logo w-56 h-14 mt-5 ml-5">
             <img src={img} alt="Logo" />
           </div>
@@ -65,7 +73,7 @@ function Homepg() {
           placeholder="Find the list of.."
           className="rounded h-8 border border-slate-600 mx-auto pl-2"
         />
-        <h2 className="text-blue-500 mr-10">{`Welcome, ${user && user.Username}`}</h2>
+        <h2 className="text-blue-500 mr-10">{`Welcome, ${user ? user.Username : ''}`}</h2>
         <Link to="/Makelist">
           <button className="rounded border border-black text-white button mr-20 h-9 w-24">
             Make a list
@@ -93,9 +101,10 @@ function Homepg() {
             </button>
           </div>
         ))}
-          <button onClick={handleLogout} className="rounded bg-blue-600 logoutbtn sticky bottom-5 ml-96">log out</button>
-        
-     </div>
+        <button onClick={handleLogout} className="rounded bg-blue-600 logoutbtn sticky bottom-5">
+          log out
+        </button>
+      </div>
     </div>
   );
 }
