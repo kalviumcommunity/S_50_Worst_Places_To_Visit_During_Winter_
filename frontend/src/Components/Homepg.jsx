@@ -12,6 +12,7 @@ function Homepg() {
   const [data, setData] = useState([]);
   const [user, setUser] = useState();
   const [error, setError] = useState(null);
+  const [selectedUsername, setSelectedUsername] = useState("");
 
   const setCookie = (id) => {
     Cookies.set('id', id);
@@ -21,20 +22,6 @@ function Homepg() {
     Cookies.remove('userData');
     setUser(null);
   };
-
-  // useEffect(() => {
-  //   const UserData = Cookies.get('userData');
-  
-  //   try {
-  //     if (UserData) {
-  //       const parsedUserData = JSON.parse(UserData);
-  //       setUser(parsedUserData);
-  //     }
-  //   } catch (error) {
-  //     console.error('Error parsing user data from cookies:', error);
-  //   }
-  // }, []);
-  
 
   useEffect(() => {
     const fetchData = async () => {
@@ -49,6 +36,14 @@ function Homepg() {
 
     fetchData();
   }, []);
+
+  const handleSelectChange = (event) => {
+    setSelectedUsername(event.target.value);
+  };
+
+  const filteredData = selectedUsername
+    ? data.filter((entry) => entry.Users === selectedUsername)
+    : data;
 
   const handleDelete = async (id) => {
     try {
@@ -83,14 +78,29 @@ function Homepg() {
 
       <div className="bgimg border border-black h-72 flex items-center justify-center"></div>
 
+      <select
+        className="w-96 h-12 border border-black pl-2 mt-10 hover:shadow-lg duration-500"
+        onChange={handleSelectChange}
+        value={selectedUsername}
+      >
+        <option className="bg-white text-black font-mono border border-black" value="">All</option>
+        {data.map((entry) => (
+          <option className="bg-white text-black" key={entry.Users} value={entry.Users}>
+            {entry.Users}
+          </option>
+        ))}
+      </select>
+
       <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-4 mt-4 w-2/4 mx-auto items-center justify-center">
-        {data.map((entry, index) => (
+        {filteredData.map((entry, index) => (
           <div key={index} className="text-center border border-black p-4 rounded-md">
+            <p>User: {entry.Users}</p>
             <p>Places: {entry.Places}</p>
             <p>AvgWinterTemp: {entry.AvgWinterTemp}</p>
             <p>Snowfall: {entry.Snowfall}</p>
             <p>WinterHazard: {entry.WinterHazard}</p>
             <p>TravelAdvisories: {entry.TravelAdvisories}</p>
+
             <Link to="/update">
               <button onClick={() => setCookie(entry._id)} className="w-16 border border-black bg-green-600 rounded">
                 update

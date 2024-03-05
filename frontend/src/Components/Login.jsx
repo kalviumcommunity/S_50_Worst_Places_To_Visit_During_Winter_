@@ -40,7 +40,7 @@ function Login() {
             Cookies.set("userData", JSON.stringify(user));
             console.log("Login successful!");
             setSub(true);
-            navigate("/");
+            navigate("/homepg");
         } else {
             console.log("Invalid email or password");
         }
