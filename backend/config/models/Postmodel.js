@@ -1,12 +1,12 @@
 const mongoose = require("mongoose");
 
 const postSchema = new mongoose.Schema({
-    ID: Number, 
+    UserId: String,
     Places: String,
     AvgWinterTemp: String ,
     Snowfall:  String,
     WinterHazard: String, 
-    TravelAdvisories: String
+    TravelAdvisories: String,
 });
 
 const postmodel = mongoose.model("Post", postSchema);
