@@ -1,13 +1,12 @@
 const express = require("express");
 require('dotenv').config();
 const port = process.env.port;
-const connectDb = require("./config/database"); 
+const connectDb = require("./config/models/database"); 
 const app = express();
 const userrouter = require("./routes/userRoute");
 const postrouter = require("./routes/postRoute");
 const cors = require('cors');
 
-// Use CORS middleware
 app.use(cors());
 
 const MONGO = process.env.MONGO_URI;
@@ -29,9 +28,3 @@ app.listen(port, () => {
 });
 
 module.exports = app;
-
-
-
-
-
-// module.exports = app;

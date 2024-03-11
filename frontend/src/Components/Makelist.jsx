@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Cookies from 'js-cookie';
 
 const Makelist = () => {
   const navigate = useNavigate();
@@ -24,22 +25,36 @@ const Makelist = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const winterData = {
-      Places: formData.Places,
-      AvgWinterTemp: formData.AvgWinterTemp,
-      Snowfall: formData.Snowfall,
-      WinterHazard: formData.WinterHazard,
-      TravelAdvisories: formData.TravelAdvisories
-    };
+    const userDataFromCookie = Cookies.get('userData');
 
-    axios.post('http://localhost:3000/posts', winterData)
-      .then(response => {
-        console.log(response.data);
-        navigate('/');
-      })
-      .catch(error => {
-        console.error('Error:', error);
-      });
+    const user = userDataFromCookie ? JSON.parse(userDataFromCookie) : null;
+
+    if (user) {
+      console.log(user.Username)
+      const winterData = {
+        Places: formData.Places,
+        AvgWinterTemp: formData.AvgWinterTemp,
+        Snowfall: formData.Snowfall,
+        WinterHazard: formData.WinterHazard,
+        TravelAdvisories: formData.TravelAdvisories,
+        UserId: user.Username 
+      };
+
+      console.log('winterData:', winterData);
+      console.log('name:', user.Username);
+
+      axios.post('http://localhost:3000/posts', winterData)
+        .then(response => {
+          console.log('Response:', response.data);
+          navigate("/homepg");
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+    } else {
+      console.log('User data not found in cookies');
+    }
+
   };
 
   return (

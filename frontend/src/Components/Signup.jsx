@@ -39,10 +39,11 @@ const Signup = () => {
       const { user, token } = response.data;
       console.log('Token: ', token);
 
-      Cookies.set('userData', JSON.stringify(user));
+      Cookies.set('userData', JSON.stringify(userData));
       Cookies.set('Token', token);
+      console.log(Cookies)
 
-      navigate('/Homepg');
+      navigate('/homepg');
     } catch (error) {
       console.error('Error during POST request:', error);
     } finally {

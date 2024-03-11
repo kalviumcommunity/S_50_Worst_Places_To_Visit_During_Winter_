@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { Children, useEffect, useState } from 'react';
 import axios from 'axios';
 import img from '../assets/logo.png';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 
 const api = axios.create({
-  baseURL: 'http://localhost:3000',
+  baseURL: 'https://s-50-worst-places-to-visit-during-winter.onrender.com',
 });
 
 function Homepg() {
@@ -13,14 +13,16 @@ function Homepg() {
   const [user, setUser] = useState();
   const [error, setError] = useState(null);
   const [selectedUsername, setSelectedUsername] = useState("");
+  const navigate = useNavigate();
 
-  const setCookie = (id) => {
-    Cookies.set('id', id);
-  };
+  // const setCookie = (userData) => {
+  //   Cookies.set('userData', JSON.stringify(userData));
+  // };
 
   const handleLogout = () => {
     Cookies.remove('userData');
     setUser(null);
+    navigate('/');
   };
 
   useEffect(() => {
@@ -35,6 +37,11 @@ function Homepg() {
     };
 
     fetchData();
+
+    const userDataFromCookie = Cookies.get('userData');
+    if (userDataFromCookie) {
+      setUser(JSON.parse(userDataFromCookie));
+    }
   }, []);
 
   const handleSelectChange = (event) => {
@@ -44,6 +51,7 @@ function Homepg() {
   const filteredData = selectedUsername
     ? data.filter((entry) => entry.Users === selectedUsername)
     : data;
+
 
   const handleDelete = async (id) => {
     try {
@@ -58,11 +66,11 @@ function Homepg() {
   return (
     <div className="container mx-auto flex flex-col min-h-screen">
       <nav className="h-20 border border-black flex items-center sticky top-0 bg-white">
-        <Link to="/Homepg">
+       
           <div className="logo w-56 h-14 mt-5 ml-5">
             <img src={img} alt="Logo" />
           </div>
-        </Link>
+     
         <input
           type="text"
           placeholder="Find the list of.."
@@ -79,22 +87,23 @@ function Homepg() {
       <div className="bgimg border border-black h-72 flex items-center justify-center"></div>
 
       <select
-        className="w-96 h-12 border border-black pl-2 mt-10 hover:shadow-lg duration-500"
-        onChange={handleSelectChange}
-        value={selectedUsername}
-      >
-        <option className="bg-white text-black font-mono border border-black" value="">All</option>
-        {data.map((entry) => (
-          <option className="bg-white text-black" key={entry.Users} value={entry.Users}>
-            {entry.Users}
-          </option>
-        ))}
-      </select>
-
+  className="w-96 h-12 border border-black pl-2 mt-10 ml-20 hover:shadow-lg duration-500"
+  onChange={handleSelectChange}
+  value={selectedUsername}
+>
+  <option className="bg-white text-black font-mono border border-black" key="all" value="">
+    All
+  </option>
+  {data.map((entry) => (
+    <option className="bg-white text-black" key={entry.Users} value={entry.Users}>
+      {entry.Users}
+    </option>
+  ))}
+</select>
       <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-4 mt-4 w-2/4 mx-auto items-center justify-center">
         {filteredData.map((entry, index) => (
           <div key={index} className="text-center border border-black p-4 rounded-md">
-            <p>User: {entry.Users}</p>
+            <p>User: {entry.UserId}</p>
             <p>Places: {entry.Places}</p>
             <p>AvgWinterTemp: {entry.AvgWinterTemp}</p>
             <p>Snowfall: {entry.Snowfall}</p>
@@ -102,7 +111,7 @@ function Homepg() {
             <p>TravelAdvisories: {entry.TravelAdvisories}</p>
 
             <Link to="/update">
-              <button onClick={() => setCookie(entry._id)} className="w-16 border border-black bg-green-600 rounded">
+              <button onClick={() => setCookie({ id: entry._id, username: entry.Users })} className="w-16 border border-black bg-green-600 rounded">
                 update
               </button>
             </Link>
